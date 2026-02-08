@@ -5,7 +5,8 @@
   "scripts": {
     "build": "pnpm --filter trackly-sdk build && pnpm --filter trackly-react build",
     "dev": "pnpm --parallel --filter trackly-sdk --filter trackly-react dev",
-    "clean": "pnpm --recursive clean && rm -rf node_modules/.cache"
+    "clean": "pnpm --recursive clean && rm -rf node_modules/.cache",
+    "release": "./scripts/publish.sh"
   },
   "keywords": [
     "analytics",
