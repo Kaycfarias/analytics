@@ -1,0 +1,85 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    name: Publish packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Verify versions match
+        run: |
+          SDK_VERSION=$(node -p "require('./packages/sdk/package.json').version")
+          REACT_VERSION=$(node -p "require('./packages/react/package.json').version")
+          TAG_VERSION="${{ steps.version.outputs.VERSION }}"
+
+          echo "Tag version: $TAG_VERSION"
+          echo "SDK version: $SDK_VERSION"
+          echo "React version: $REACT_VERSION"
+
+          if [ "$SDK_VERSION" != "$TAG_VERSION" ] || [ "$REACT_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ Version mismatch!"
+            exit 1
+          fi
+
+      - name: Publish trackly-sdk
+        run: |
+          cd packages/sdk
+          npm publish --access public --provenance
+
+      - name: Publish trackly-react
+        run: |
+          cd packages/react
+          npm publish --access public --provenance
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## 📦 Packages Published
+
+            - `trackly-sdk@${{ steps.version.outputs.VERSION }}`
+            - `trackly-react@${{ steps.version.outputs.VERSION }}`
+
+            Install:
+            ```bash
+            npm install trackly-sdk@${{ steps.version.outputs.VERSION }} trackly-react@${{ steps.version.outputs.VERSION }}
+            ```
+          draft: false
+          prerelease: false

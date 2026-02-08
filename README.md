@@ -1,5 +1,10 @@
 # Trackly SDK Monorepo
 
+![CI](https://github.com/kaycfarias/trackly/actions/workflows/ci.yml/badge.svg)
+[![npm version - SDK](https://img.shields.io/npm/v/trackly-sdk.svg?label=trackly-sdk)](https://www.npmjs.com/package/trackly-sdk)
+[![npm version - React](https://img.shields.io/npm/v/trackly-react.svg?label=trackly-react)](https://www.npmjs.com/package/trackly-react)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 Event tracking SDK para browser com companion package React.
 
 ## 📦 Packages

@@ -7,6 +7,7 @@
 **Arquitetura:** `Analytics (facade) → EventQueue (batching) → Transport (HTTP/sendBeacon)`
 
 **Publicado no npm:**
+
 - `trackly-sdk` - Core analytics SDK
 - `trackly-react` - React hooks e components
 

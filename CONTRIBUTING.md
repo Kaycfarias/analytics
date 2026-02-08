@@ -173,11 +173,13 @@ const analytics = new Analytics({
 ### Common Issues
 
 **Build errors:**
+
 ```bash
 pnpm clean && pnpm install && pnpm build
 ```
 
 **TypeScript não reconhece tipos:**
+
 ```bash
 # Rebuild e restart TS server no editor
 pnpm build
@@ -185,6 +187,7 @@ pnpm build
 ```
 
 **Workspace dependency issues:**
+
 ```bash
 pnpm install --force
 ```
@@ -216,6 +219,7 @@ Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
 - `chore:` Tarefas de manutenção
 
 **Exemplos:**
+
 ```
 feat(sdk): adicionar suporte para custom headers
 fix(react): corrigir memory leak no usePageview
