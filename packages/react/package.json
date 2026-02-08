@@ -1,0 +1,36 @@
+{
+  "name": "@analytics/react",
+  "version": "0.1.0",
+  "description": "React integration for @analytics/sdk",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "analytics",
+    "react",
+    "hooks",
+    "tracking"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@analytics/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "react": "^18.2.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@analytics/sdk": "workspace:*"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@analytics/monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Analytics SDK monorepo",
+  "scripts": {
+    "build": "pnpm --filter @analytics/sdk build && pnpm --filter @analytics/react build",
+    "dev": "pnpm --parallel --filter @analytics/sdk --filter @analytics/react dev",
+    "clean": "pnpm --recursive clean && rm -rf node_modules/.cache"
+  },
+  "keywords": [
+    "analytics",
+    "tracking",
+    "events",
+    "browser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.1",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
